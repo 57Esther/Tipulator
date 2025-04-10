@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Tipulator</title>
+</head>
+
+<body>
+  <div id="tipulator-wrapper">
+    <h1 id="tipulator-heading">Tipulator</h1>
+
+    <p>Calculate how much to pay for your meal</p>
+
+    <form id="tipForm">
+      <div>
+        <label for="billTotal">Initial total cost before tip:</label><br />
+        <input type="number" id="billTotal" name="billTotal" min="1" required />
+      </div>
+
+      <div>
+        <label for="serviceRating">Rate service: poor, good, excellent</label><br />
+        <input type="text" id="serviceRating" name="serviceRating" required />
+        <div id="serviceRatingFeedback"></div> <!-- Feedback for invalid input -->
+      </div>
+
+      <div>
+        <label for="numPaying">Number of people splitting the bill:</label><br />
+        <input type="number" id="numPaying" name="numPaying" min="1" required />
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <hr />
+
+    <div id="results" class="hidden">
+      <h2>Results</h2>
+      <p>Total with tip:</p>
+      <div id="totalWithTip"></div>
+      <p>Each person pays:</p>
+      <div id="perPerson"></div>
+    </div>
+  </div>
+
+  <div id="controls">
+    <button id="rightButton">Move right</button>
+    <button id="leftButton">Move left</button>
+    <button id="closeButton">Close</button>
+  </div>
+
+  <!-- JavaScript validation and calculation script -->
+  <script>
+    // Move the Tipulator box to the right by 500px
+    document.getElementById('rightButton').addEventListener('click', function () {
+      const tipulatorWrapper = document.getElementById('tipulator-wrapper');
+      tipulatorWrapper.style.transform = 'translateX(500px)';
+    });
+
+    // Move the Tipulator box back to its original position
+    document.getElementById('leftButton').addEventListener('click', function () {
+      const tipulatorWrapper = document.getElementById('tipulator-wrapper');
+      tipulatorWrapper.style.transform = 'translateX(0)';
+    });
+
+    // Close the page and display a thank you message
+    document.getElementById('closeButton').addEventListener('click', function () {
+      document.body.innerHTML = '<h1>Thank you for using the tipulator</h1>';
+    });
+
+    // Form validation and tip calculation logic
+    document.getElementById('tipForm').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevents form from refreshing
+
+      const ratingInput = document.getElementById('serviceRating');
+      const feedback = document.getElementById('serviceRatingFeedback');
+      const rating = ratingInput.value.trim().toLowerCase();
+      
+      const billTotal = parseFloat(document.getElementById('billTotal').value);
+      const numPaying = parseInt(document.getElementById('numPaying').value);
+
+      const validRatings = ['poor', 'good', 'excellent'];
+
+      // Validate service rating input
+      if (!validRatings.includes(rating)) {
+        feedback.textContent = 'Please enter "poor", "good", or "excellent".';
+        feedback.style.color = 'red';
+      } else {
+        feedback.textContent = ''; // Clear feedback if valid rating
+
+        // Calculate the tip based on service rating
+        let tipPercentage = 0;
+        if (rating === 'excellent') {
+          tipPercentage = 0.20; // 20% tip
+        } else if (rating === 'good') {
+          tipPercentage = 0.10; // 10% tip
+        } else if (rating === 'poor') {
+          tipPercentage = 0; // No tip
+        }
+
+        // Calculate the total tip and total amount with tip
+        const tipAmount = billTotal * tipPercentage;
+        const totalWithTip = billTotal + tipAmount;
+
+        // Calculate the amount each person pays
+        const perPerson = totalWithTip / numPaying;
+
+        // Display the results
+        document.getElementById('totalWithTip').textContent = `$${totalWithTip.toFixed(2)}`;
+        document.getElementById('perPerson').textContent = `$${perPerson.toFixed(2)}`;
+
+        // Make the results visible
+        document.getElementById('results').classList.remove('hidden');
+      }
+    });
+  </script>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

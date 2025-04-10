@@ -1,0 +1,58 @@
+# 💸 Tipulator
+
+**Tipulator** is a simple, interactive web application that calculates how much to pay for your meal, including tips, and how to split the bill among people.
+
+![Tipulator Screenshot](https://via.placeholder.com/800x400?text=Tipulator+Screenshot)
+
+## 🚀 Features
+
+- Input total bill amount
+- Rate service quality (`poor`, `good`, `excellent`)
+- Automatically calculate:
+  - Total with tip
+  - Amount each person pays
+- Real-time form validation with feedback
+- Interactive UI with hover effects and transitions
+- JavaScript-powered DOM manipulation and event handling
+
+## 🛠️ Built With
+
+- HTML5
+- CSS3
+- JavaScript
+
+## 🎯 How to Use
+
+1. **Enter** the initial cost of the meal.
+2. **Rate** the service (`poor`, `good`, or `excellent`).
+3. **Choose** how many people are splitting the bill.
+4. **Click Submit** to calculate the final cost and individual share.
+
+## 🧠 Tip Calculation Logic
+
+| Service Rating | Tip Percentage |
+|----------------|----------------|
+| Excellent      | 20%            |
+| Good           | 10%            |
+| Poor           | 0%             |
+
+## 💻 Live Demo
+
+🔗 [View the Live Tipulator](https://yourusername.github.io/tipulator/)  
+__
+
+## 📁 Project Structure
+
+tipulator/ ├── index.html ├── style.css ├── script.js └── README.md
+
+
+## 📸 Screenshots
+
+> You can upload screenshots or screen recordings to show how the app works here.
+
+## 🙌 Acknowledgments
+
+- [Code Institute](https://codeinstitute.net/) for the background image and project inspiration.
+- Google Fonts – [Quicksand](https://fonts.google.com/specimen/Quicksand)
+
+
